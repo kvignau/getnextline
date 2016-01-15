@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/04 15:31:49 by kvignau           #+#    #+#             */
+/*   Updated: 2016/01/15 15:56:50 by kvignau          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+static void			ft_restline(char **reste, char *buf)
+{
+	if (*reste)
+	{
+		*reste = ft_strjoin(*reste, buf);
+	}
+	else
+		*reste = ft_strdup(buf);
+}
+
+int					get_next_line(int const fd, char **line)
+{
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	char			*tmp;
+	static char		*reste = NULL;
+
+	if (!line)
+		return (-1);
+	if (reste)
+	{
+		tmp = ft_strchr(reste, '\n');
+		if (tmp)
+		{
+			*line = ft_strsub(reste, 0, tmp - reste);
+			if (tmp + 1)
+			{
+				ft_memmove(reste, tmp + 1, ft_strlen(tmp));
+				return (1);
+			}
+			reste = NULL;
+		}
+	}
+	while ((ret = read(fd, buf, BUFF_SIZE)))
+	{
+		if (ret == -1)
+			return (-1);
+		buf[ret] = '\0';
+		ft_restline(&reste, buf);
+		return (1);
+	}
+	if (reste)
+	{
+		*line = reste;
+		reste = NULL;
+	}
+	return (0);
+}
