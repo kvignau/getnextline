@@ -22,35 +22,48 @@ static void			ft_restline(char **reste, char *buf)
 		*reste = ft_strdup(buf);
 }
 
-int					get_next_line(int const fd, char **line)
+static int			ft_getline(char **reste, char **line)
+{
+
+	char			*tmp;
+
+	tmp = ft_strchr(*reste, '\n');
+	if (tmp)
+	{
+		*line = ft_strsub(*reste, 0, tmp - *reste);
+		if (tmp + 1)
+			ft_memmove(*reste, tmp + 1, ft_strlen(tmp));
+		else
+			ft_memdel((void **)reste);
+		tmp = NULL;
+		return (1);
+	}
+	return (0);
+}
+
+int				get_next_line(int const fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
-	int				ret;
-	char			*tmp;
+	int			ret;
 	static char		*reste = NULL;
 
 	if (!line)
 		return (-1);
-	if (reste)
-	{
-		tmp = ft_strchr(reste, '\n');
-		if (tmp)
-		{
-			*line = ft_strsub(reste, 0, tmp - reste);
-			ft_memmove(reste, tmp + 1, ft_strlen(tmp));
-			tmp = NULL;
-			return (1);
-		}
-	}
+	if (reste && ft_getline(&reste, line))
+		return (1);
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
 			return (-1);
 		buf[ret] = '\0';
 		ft_restline(&reste, buf);
-		return (1);
+		if (ft_getline(&reste, line))
+			return (1);
 	}
-	*line = reste;
-	reste = NULL;
+	if (reste)
+	{
+		*line = reste;
+		reste = NULL;
+	}
 	return (0);
 }

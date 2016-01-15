@@ -28,8 +28,10 @@ int					main(int ac, char **av)
 		while (get_next_line(fd, &line))
 		{
 			ft_putstr(line);
+			free(line);
 		}
-		//ft_putstr(line);
+		ft_putstr(line);
+		free(line);
 	}
 	else if (ac == 1)
 	{
