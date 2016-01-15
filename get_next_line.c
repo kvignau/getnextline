@@ -31,10 +31,7 @@ static int			ft_getline(char **reste, char **line)
 	if (tmp)
 	{
 		*line = ft_strsub(*reste, 0, tmp - *reste);
-		if (tmp + 1)
-			ft_memmove(*reste, tmp + 1, ft_strlen(tmp));
-		else
-			ft_memdel((void **)reste);
+		ft_memmove(*reste, tmp + 1, ft_strlen(tmp));
 		tmp = NULL;
 		return (1);
 	}
@@ -60,10 +57,7 @@ int				get_next_line(int const fd, char **line)
 		if (ft_getline(&reste, line))
 			return (1);
 	}
-	if (reste)
-	{
-		*line = reste;
-		reste = NULL;
-	}
+	*line = reste;
+	reste = NULL;
 	return (0);
 }
