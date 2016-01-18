@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 15:31:49 by kvignau           #+#    #+#             */
-/*   Updated: 2016/01/15 16:16:06 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/01/18 09:28:29 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 static void			ft_restline(char **reste, char *buf)
 {
+	char			*tmp;
+
+	tmp = NULL;
 	if (*reste)
 	{
-		*reste = ft_strjoin(*reste, buf);
+		tmp = ft_strdup(*reste);
+		ft_memdel((void **)reste);
+		*reste = ft_strjoin(tmp, buf);
+		ft_memdel((void **)&tmp);
 	}
 	else
 		*reste = ft_strdup(buf);
@@ -24,7 +30,6 @@ static void			ft_restline(char **reste, char *buf)
 
 static int			ft_getline(char **reste, char **line)
 {
-
 	char			*tmp;
 
 	tmp = ft_strchr(*reste, '\n');
@@ -38,10 +43,10 @@ static int			ft_getline(char **reste, char **line)
 	return (0);
 }
 
-int				get_next_line(int const fd, char **line)
+int					get_next_line(int const fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
-	int			ret;
+	int				ret;
 	static char		*reste = NULL;
 
 	if (!line)
