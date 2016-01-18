@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 17:49:25 by kvignau           #+#    #+#             */
-/*   Updated: 2016/01/18 09:27:57 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/01/18 17:59:04 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int					main(int ac, char **av)
 			ft_putstr(line);
 			free(line);
 		}
-		ft_putstr(line);
-		free(line);
 	}
 	else if (ac == 1)
 	{

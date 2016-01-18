@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 15:31:49 by kvignau           #+#    #+#             */
-/*   Updated: 2016/01/18 09:28:29 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/01/18 17:58:23 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int					get_next_line(int const fd, char **line)
 		if (ft_getline(&reste, line))
 			return (1);
 	}
+	if (reste == NULL || reste[0] == '\0')
+		return (0);
 	*line = reste;
 	reste = NULL;
-	return (0);
+	return (1);
 }
