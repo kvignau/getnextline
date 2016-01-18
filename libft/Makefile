@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 10:04:06 by kvignau           #+#    #+#              #
-#    Updated: 2016/01/07 12:05:09 by kvignau          ###   ########.fr        #
+#    Updated: 2015/12/03 10:47:05 by kvignau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC += ft_memcpy.c ft_memccpy.c ft_memmove.c ft_putchar.c ft_putnbr.c
 SRC += ft_putstr.c ft_strcpy.c ft_strncpy.c ft_strdup.c ft_strchr.c
 SRC += ft_strcat.c ft_strncat.c ft_strlen.c ft_nbrlen.c
 SRCO = $(SRC:.c=.o)
-HEADERS = includes
+HEADERS = .
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
@@ -33,7 +33,7 @@ all: $(NAME)
 re: fclean all
 
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS) -I $(HEADERS)
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 $(NAME): $(SRCO)
 	ar rc $@ $^

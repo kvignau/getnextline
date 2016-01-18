@@ -16,10 +16,10 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
 
-	str = ft_strnew(len + 1);
+	str = ft_strnew(len);
 	if (str == NULL || s == NULL)
 		return (NULL);
 	ft_strncpy(str, s + start, len);
-	str[len + 1] = '\0';
+	str[len] = '\0';
 	return (str);
 }

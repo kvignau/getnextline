@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 11:46:04 by kvignau           #+#    #+#             */
-/*   Updated: 2016/01/07 10:43:33 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/11/24 12:01:14 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char		*ft_strdup(const char *s1)
 	i = 0;
 	len = ft_strlen(s1);
 	tab = (char *)malloc(sizeof(char) * (len + 1));
-	if (!tab || !s1)
+	if (!tab)
 		return (NULL);
 	while (i < len)
 	{

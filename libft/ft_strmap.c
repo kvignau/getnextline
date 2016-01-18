@@ -20,7 +20,9 @@ char		*ft_strmap(char const *s, char (*f)(char))
 	i = 0;
 	if (s && f)
 	{
-		str = (char *)malloc(sizeof(char) * ft_strlen(s));
+		str = ft_strnew(ft_strlen(s));
+		if (!str)
+			return (NULL);
 		while (s[i])
 		{
 			str[i] = (*f)(s[i]);

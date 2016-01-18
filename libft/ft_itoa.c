@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 11:52:17 by kvignau           #+#    #+#             */
-/*   Updated: 2015/12/03 10:46:01 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/01/18 11:31:12 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ char						*ft_itoa(int n)
 
 	len = ft_nbrlen(n);
 	nb = (unsigned int)n;
-	str = ft_strnew(len + 1);
+	str = ft_strnew(len);
+	if (!str)
+		return (NULL);
 	if (n < 0)
 	{
 		str[0] = '-';
@@ -29,13 +31,10 @@ char						*ft_itoa(int n)
 	str[len] = '\0';
 	if (n == 0)
 		str[--len] = '0';
-	else
+	while (nb != 0)
 	{
-		while (nb != 0)
-		{
-			str[--len] = (nb % 10) + 48;
-			nb = nb / 10;
-		}
+		str[--len] = (nb % 10) + 48;
+		nb = nb / 10;
 	}
 	return (str);
 }

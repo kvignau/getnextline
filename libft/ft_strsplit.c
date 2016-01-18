@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:13:48 by kvignau           #+#    #+#             */
-/*   Updated: 2015/12/01 14:18:46 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/01/18 11:51:14 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char			*ft_stradd(char const *s, char c, int i)
 	j = 0;
 	len = ft_strlencar(s, c, i);
 	word = ft_strnew(len + 1);
+	if (!word)
+		return (NULL);
 	while (s[i] && j < len)
 	{
 		word[j] = s[i + j];
@@ -50,9 +52,9 @@ char				**ft_strsplit(char const *s, char c)
 	ok = 1;
 	i = 0;
 	j = 0;
-	if (s == NULL)
-		return (NULL);
 	tab = (char **)malloc(sizeof(char *) * (ft_nbwords(s, c) + 1));
+	if (!tab || !s)
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] != c && ok)
